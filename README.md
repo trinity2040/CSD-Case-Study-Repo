@@ -27,9 +27,25 @@
    - this method is execute every time when ever the run time error is hitted.
 
 
-## Additional Feature
-https://docs.docker.com/engine/install/ubuntu/
-sudo apt-get install docker-compose
-https://docs.docker.com/compose/insta
+## Additional Features
 
-- 
+- ### updateMenuFileItemWithCategory()
+  - this method genraly make sure that category in the file must be in a Lexicographical order.
+- ### genrateBill()
+  - this method genrate the bill on the basis of order id which is unique for every order.
+- ### showCategory()
+  - this method is used to show the menu card by first showing category and choosing specific category than show item inside it.
+
+## Helper method()
+
+- ### updateMenuFileAfterRemoval()
+  - this method help to update the menuItem.txt after remove the item from the list.
+- ### formateMenuItemForFile()
+  - this method help to formate the item into file so that programmer easily map into orderList.
+  
+ 
+## Exception Handling
+- ### IOException
+  - this exception is using in the program where ever the input file i.e menuitem.txt is used for read and write operations.
+- ### InputMismatchException
+  - this exception is used where application take the input from the user to ensure no wrong input is provided.
