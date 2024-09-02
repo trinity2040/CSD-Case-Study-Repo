@@ -1,26 +1,41 @@
-                                                      **Car Rental Management System**
-This is a Java-based console application designed to manage a car rental service. The application provides functionality for managing customers, cars, and rental transactions, including renting, returning, and viewing rental details.
+**Car Rental Management System**
+  
+Welcome to the Car Rental Management System! This is a Java-based console application designed to manage a car rental service. The application provides functionalities for managing customers, cars, and rental transactions, including renting, returning, and viewing rental details.
 
 **Features**
-Customer Management: Add, update, view, and delete customer records.
-Car Management: Add, update, view, and delete car records.
-Rental Management: Rent a car, return a car, and view rental details.
-Database Integration: Uses a MySQL database to store and manage data.
-Technologies Used
-Java: The main programming language used to build the application.
-JDBC (Java Database Connectivity): For connecting and executing queries on the MySQL database.
-MySQL: The relational database management system used to store data and manipulate database tables.
+
+🧑‍💼 Customer Management: Add, update, view, and delete customer records.
+
+🚘 Car Management: Add, update, view, and delete car records.
+
+📅 Rental Management: Rent a car, return a car, and view rental details.
+
+🗄️ Database Integration: Uses a MySQL database to store and manage data.
+
+
+**🛠️ Technologies Used**
+
+
+☕ Java: The main programming language used to build the application.
+
+🔗 JDBC (Java Database Connectivity): For connecting and executing queries on the MySQL database.
+
+🗃️ MySQL: The relational database management system used to store data and manipulate database tables.
 
 **Database Schema**
-Before running the application, create the necessary database tables in MySQL using the following SQL commands.
 
-1. Database Creation
+Before running the application, create the necessary database tables in MySQL using the following SQL commands:
+
+1️⃣ Database Creation
+
 First, create a database named car_rental_db:
 
 CREATE DATABASE car_rental_db;
-USE Ccar_rental_db;
 
-2. Customers Table
+USE car_rental_db;
+
+2️⃣ Customers Table
+
 Create a table to store customer details:
 
 CREATE TABLE Customer (
@@ -31,7 +46,8 @@ CREATE TABLE Customer (
     address VARCHAR(255) NOT NULL
 );
 
-3. Cars Table
+3️⃣ Cars Table
+
 Create a table to store car details:
 
 CREATE TABLE Car (
@@ -42,7 +58,8 @@ CREATE TABLE Car (
     daily_rate DECIMAL(10, 2) NOT NULL
 );
 
-4. Rentals Table
+4️⃣ Rentals Table
+
 Create a table to store rental records:
 
 CREATE TABLE Rental (
@@ -55,33 +72,44 @@ CREATE TABLE Rental (
     FOREIGN KEY (car_id) REFERENCES Car(car_id),
     FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
 );
-Getting Started
+
+🚀 Getting Started
+
 Follow the steps below to set up the project locally.
 
-**1. Clone the Repository**
+1️⃣ Clone the Repository
 
 git clone https://github.com/your-username/car-rental-management-system.git
-cd car-rental-management-system
-**2. Set Up the Database**
-Make sure you have MySQL installed and running. Execute the SQL commands provided above to create the necessary tables in the CarRentalDB database.
 
-**3. Configure Database Connection**
+cd car-rental-management-system
+
+2️⃣ Set Up the Database
+
+Make sure you have MySQL installed and running. Execute the SQL commands provided above to create the necessary tables in the car_rental_db database.
+
+3️⃣ Configure Database Connection
+
 Open the Car_Rental_Menu class and configure the database connection details:
 
-conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/CarRentalDB", "username", "password");
+
+conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/car_rental_db", "username", "password");
+
 Replace "username" and "password" with your MySQL credentials.
 
-**4. Compile and Run the Application**
-Compile the Java classes using the terminal or an IDE of your choice:
+4️⃣ Compile and Run the Application
 
+Compile the Java classes using the terminal or an IDE of your choice.
 
-**How to Use**
+📋 How to Use
 
-1.Customer Management:
+Customer Management 🧑‍💼:
+
 Add, view, update, or delete customer records.
 
-2.Car Management:
+Car Management 🚘:
+
 Add, view, update, or delete car records.
 
-3.Rental Management:
+Rental Management 📅:
+
 Rent a car, return a car, or view rental details.
