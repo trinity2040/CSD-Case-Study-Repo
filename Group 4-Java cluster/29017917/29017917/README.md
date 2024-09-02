@@ -107,13 +107,13 @@ Database Credentials: Modify the DatabaseConnection.java file to include your My
 ### Grade Table
 - `grade_id` (Primary Key)
 - `student_id` (Foreign Key references Student Table)
-- `course_id` (Foreign Key references Course Table)
+- `course_id` (Foreign Key references Course Table) 
 - `grade`
 
 
 
 ### Usage
-Once the application is running, we will be presented with a menu. Follow the prompts to perform operations such as adding a student, viewing teacher details, assigning grades, calculating GPA, etc.
+Once the application is running, we will be presented with a menu. Follow the prompts to perform operations such as adding a student, viewing teacher details, assigning grades, calculating GPA, etc..
 
 ### Sample Menu Options
 1. Student Management
