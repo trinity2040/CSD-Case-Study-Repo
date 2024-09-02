@@ -2,7 +2,6 @@ package com.schoolmanagement.dao;
 
 import com.schoolmanagement.model.Grade;
 import com.schoolmanagement.util.DatabaseConnection;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,20 +88,56 @@ public class GradeDAO {
         return grades;
     }
 
-    public double calculateGPA(int studentId) {
-        double gpa = 0.0;
-        try (Connection connection = DatabaseConnection.getConnection()) {
-            String query = "SELECT AVG(grade) as gpa FROM Grade WHERE student_id = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, studentId);
-            ResultSet resultSet = preparedStatement.executeQuery();
+//     public double calculateGPA(int studentId) {
+//         double gpa = 0.0;
+//         try (Connection connection = DatabaseConnection.getConnection()) {
+//             String query = "SELECT AVG(grade) as gpa FROM Grade WHERE student_id = ?";
+//             PreparedStatement preparedStatement = connection.prepareStatement(query);
+//             preparedStatement.setInt(1, studentId);
+//             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
-                gpa = resultSet.getDouble("gpa");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+//             if (resultSet.next()) {
+//                 gpa = resultSet.getDouble("gpa");
+//             }
+//         } catch (SQLException e) {
+//             e.printStackTrace();
+//         }
+//         return gpa;
+//     }
+// }
+
+public double calculateGPA(int studentId) {
+    double gpa = 0.0;
+    int gradeCount = 0;
+    
+    try (Connection connection = DatabaseConnection.getConnection()) {
+        String query = "SELECT grade FROM Grade WHERE student_id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, studentId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            String grade = resultSet.getString("grade");
+            gpa += mapGradeToGPA(grade);
+            gradeCount++;
         }
-        return gpa;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    
+    return (gradeCount > 0) ? gpa / gradeCount : 0.0;
+}
+
+private double mapGradeToGPA(String grade) {
+    switch (grade) {
+        case "O": return 9.5; // Adjusted average for O grade
+        case "A": return 8.5; // Adjusted average for A grade
+        case "B": return 7.5; // Adjusted average for B grade
+        case "C": return 6.5; // Adjusted average for C grade
+        case "D": return 5.5; // Adjusted average for D grade
+        case "F": return 4.5; // Adjusted average for F grade
+        default: return 0.0; // In case of an unknown grade
+    }
+}
+
 }
