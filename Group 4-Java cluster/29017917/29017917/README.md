@@ -1,5 +1,5 @@
 # Grade Calculation for School Management System
-### Candidate ID: 29017917
+### Cognizant Candidate ID: 29017917
 
 ## Overview
 
