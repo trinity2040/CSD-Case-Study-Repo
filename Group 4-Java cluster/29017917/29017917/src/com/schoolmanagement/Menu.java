@@ -2,7 +2,6 @@ package com.schoolmanagement;
 
 import com.schoolmanagement.model.*;
 import com.schoolmanagement.service.*;
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -79,7 +78,7 @@ public class Menu {
         student.setName(scanner.next());
         System.out.print("Enter date of birth (YYYY-MM-DD): ");
         student.setDateOfBirth(scanner.next());
-        System.out.print("Enter address: ");
+        System.out.print("Enter address/place: ");
         student.setAddress(scanner.next());
         System.out.print("Enter email: ");
         student.setEmail(scanner.next());
@@ -278,15 +277,21 @@ public class Menu {
 
     private void addCourse() {
         Course course = new Course();
+        Scanner scanner = new Scanner(System.in); // Ensure the scanner is initialized
+    
         System.out.print("Enter title: ");
-        course.setTitle(scanner.next());
+        course.setTitle(scanner.nextLine());
+    
         System.out.print("Enter description: ");
-        course.setDescription(scanner.next());
+        course.setDescription(scanner.nextLine());
+    
         System.out.print("Enter teacher ID: ");
         course.setTeacherId(scanner.nextInt());
+    
         courseService.addCourse(course);
         System.out.println("Course added successfully!");
     }
+    
 
     private void viewCourse() {
         System.out.print("Enter course ID: ");

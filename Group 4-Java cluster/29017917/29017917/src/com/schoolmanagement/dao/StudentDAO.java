@@ -2,7 +2,6 @@ package com.schoolmanagement.dao;
 
 import com.schoolmanagement.model.Student;
 import com.schoolmanagement.util.DatabaseConnection;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class StudentDAO {
                 student.setStudentId(resultSet.getInt("student_id"));
                 student.setName(resultSet.getString("name"));
                 student.setDateOfBirth(resultSet.getString("date_of_birth"));
-                student.setAddress(resultSet.getString("address"));
+                student.setAddress(resultSet.getString("address/place"));
                 student.setEmail(resultSet.getString("email"));
             }
         } catch (SQLException e) {
