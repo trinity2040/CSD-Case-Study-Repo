@@ -28,13 +28,20 @@ marketplace/
 SETUP INSTRUCTIONS
 1. Database Setup
 To set up the database, execute the SQL statements provided in the setup.sql file. This file includes all necessary SQL commands to create the database schema and sample data.
+
 -Download the setup.sql file from this repository.
+
 -Open your MySQL client (e.g., MySQL Workbench, command line).
+
 -Execute the SQL statements in the setup.sql file.
+
 2. Database Configuration
 Update the DatabaseConnection.java file with your MySQL database credentials:
+
 -private static final String URL = "jdbc:mysql://localhost:3306/marketplace_db";
+
 -private static final String USER = "root"; // Replace with your MySQL username
+
 -private static final String PASSWORD = "password@123"; // Replace with your MySQL password
 3. Running the Application
 Compile the Java code
