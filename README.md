@@ -1,9 +1,11 @@
 DIGITAL MARKETPLACE CONSOLE APPLICATION
 
 Overview
+
 This project is a Java-based console application simulating a digital marketplace. It includes functionalities for managing products, sellers, and transactions. The application uses MySQL for the database and JDBC for database connectivity.
 
 PROJECT STRUCTURE
+
 marketplace/
 ├── src/
 │   ├── app/
