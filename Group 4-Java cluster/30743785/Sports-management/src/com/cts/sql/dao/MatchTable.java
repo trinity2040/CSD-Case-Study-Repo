@@ -1,5 +1,8 @@
-package cts.sql.sp;
+package com.cts.sql.dao;
 import java.sql.*;
+
+import com.cts.sql.model.MatchClass;
+
 public class MatchTable {
 
 	public void addMatch(MatchClass matchclass)throws Exception {

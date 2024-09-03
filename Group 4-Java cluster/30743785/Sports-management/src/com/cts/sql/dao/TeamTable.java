@@ -1,9 +1,11 @@
-package cts.sql.sp;
+package com.cts.sql.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import com.cts.sql.model.TeamClass;
 
 public class TeamTable {
 

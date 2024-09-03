@@ -1,4 +1,4 @@
-package cts.sql.sp;
+package com.cts.sql.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.cts.sql.model.PlayerClass;
 
 public class PlayerTable {
 
@@ -165,7 +167,7 @@ public class PlayerTable {
 
 	        PreparedStatement stmt = connection.prepareStatement(query);
 	        ResultSet res = stmt.executeQuery();
-
+	        Boolean check = false;
 	            while (res.next()) {
 
 	                System.out.println("Player_id: " + res.getInt("player_id"));
@@ -174,8 +176,9 @@ public class PlayerTable {
 	                System.out.println("Team_id: " + res.getInt("team_id"));
 	                System.out.println("Position: " + res.getString("position"));
 	                System.out.println("");
+	                check=true;
 	            }
-	            if(res.next()==false) {
+	            if(res.next()==false && check==false) {
 	            	System.out.println("Player_id not found...");
 	            }
 	    

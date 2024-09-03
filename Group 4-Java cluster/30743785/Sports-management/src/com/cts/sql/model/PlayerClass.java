@@ -1,4 +1,4 @@
-package cts.sql.sp;
+package com.cts.sql.model;
 
 public class PlayerClass {
 	int player_id;

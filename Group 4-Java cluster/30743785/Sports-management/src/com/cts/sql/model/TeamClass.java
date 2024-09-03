@@ -1,4 +1,4 @@
-package cts.sql.sp;
+package com.cts.sql.model;
 public class TeamClass{
     private int teamId;
     private String name;

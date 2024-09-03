@@ -1,4 +1,4 @@
-package cts.sql.sp;
+package com.cts.sql.model;
 
 import java.sql.Date;
 

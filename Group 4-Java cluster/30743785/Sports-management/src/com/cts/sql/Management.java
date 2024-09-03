@@ -1,6 +1,14 @@
-package cts.sql.sp;
+package com.cts.sql;
 
 import java.util.*;
+
+import com.cts.sql.dao.MatchTable;
+import com.cts.sql.dao.PlayerTable;
+import com.cts.sql.dao.TeamTable;
+import com.cts.sql.model.MatchClass;
+import com.cts.sql.model.PlayerClass;
+import com.cts.sql.model.TeamClass;
+
 import java.sql.Date;
 
 public class Management {
@@ -153,8 +161,8 @@ public class Management {
 			System.out.println("Enter the result:");
 			String result = sc.next();
 			
-			MatchClass matchclass = new MatchClass(t1,t2,date,venue,result);
-			match.addMatch(matchclass);
+			//MatchClass matchclass = new MatchClass(t1,t2,date,venue,result);
+			match.addMatch(new MatchClass(t1,t2,date,venue,result));
 			break;
 		case 2:
 			System.out.println("Enter the match_id to view :");
