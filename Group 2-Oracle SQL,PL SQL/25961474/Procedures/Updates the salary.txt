@@ -1,0 +1,28 @@
+
+/**
+ * Updates the salary of an employee.
+ */
+ CREATE OR REPLACE PROCEDURE Update_Salary (
+    p_employee_id IN Employees.EMPLOYEE_ID%TYPE,
+    p_new_salary IN Employees.SALARY%TYPE
+) IS
+    v_old_salary Employees.SALARY%TYPE;
+BEGIN
+    SELECT SALARY INTO v_old_salary FROM Employees WHERE EMPLOYEE_ID = p_employee_id;
+
+    -- Update salary
+    UPDATE Employees
+    SET SALARY = p_new_salary
+    WHERE EMPLOYEE_ID = p_employee_id;
+
+    -- Insert into Salary_Updates table
+    INSERT INTO Salary_Updates (
+        SALARY_UPDATE_ID, EMPLOYEE_ID, OLD_SALARY, NEW_SALARY, EFFECTIVE_DATE
+    ) VALUES (
+        Salary_Updates_SEQ.NEXTVAL, p_employee_id, v_old_salary, p_new_salary, SYSDATE
+    );
+
+    COMMIT;
+    DBMS_OUTPUT.PUT_LINE('Salary updated successfully.');
+END Update_Salary;
+/
