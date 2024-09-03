@@ -1,0 +1,20 @@
+CREATE DATABASE EmployeeAttendanceSystem;
+
+USE EmployeeAttendanceSystem;
+
+CREATE TABLE Employee (
+    employee_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    department VARCHAR(50),
+    email VARCHAR(100),
+    phone_number VARCHAR(15)
+);
+
+CREATE TABLE Attendance (
+    attendance_id INT PRIMARY KEY AUTO_INCREMENT,
+    employee_id INT,
+    date DATE,
+    status VARCHAR(10),
+    FOREIGN KEY (employee_id) REFERENCES Employee(employee_id),
+    UNIQUE (employee_id, date) 
+);
