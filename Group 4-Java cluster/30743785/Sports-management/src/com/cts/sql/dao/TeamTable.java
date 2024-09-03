@@ -121,9 +121,6 @@ public class TeamTable {
 	                System.out.println();
 	            }
 	            
-//	            if(res.next()==false) {
-//	            	System.out.println("Team_id not found...");
-//	            }
 		
 	}
 

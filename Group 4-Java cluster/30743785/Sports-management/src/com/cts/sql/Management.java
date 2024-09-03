@@ -5,6 +5,7 @@ import java.util.*;
 import com.cts.sql.dao.MatchTable;
 import com.cts.sql.dao.PlayerTable;
 import com.cts.sql.dao.TeamTable;
+import com.cts.sql.exceptions.TeamNotFoundException;
 import com.cts.sql.model.MatchClass;
 import com.cts.sql.model.PlayerClass;
 import com.cts.sql.model.TeamClass;
@@ -55,8 +56,10 @@ public class Management {
 			System.out.println("Enter the team captain :");
 			uteamclass.setCaptain(sc.next());
 			team.updateTeam(uteamclass);
-			}else {
-				System.out.println("Team not Found");
+			}
+			
+			if(uteamclass==null) {
+				throw new TeamNotFoundException("Team with ID " + uid + " does not exist.") ;
 			}
 			break;
 		case 4:

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.cts.sql.exceptions.PlayerNotFoundException;
 import com.cts.sql.model.PlayerClass;
 
 public class PlayerTable {
@@ -30,7 +31,6 @@ public class PlayerTable {
 
         if (res>0) {
         	System.out.println("Player added succesfully..! ");
-        	
         	
         	String qus = "update team set total_players= (select count(*) from player where team_id=?) where team_id=?;";
             
@@ -76,7 +76,13 @@ public class PlayerTable {
         	playerclass.setPosition(res.getString("position"));
         	
         }
+        
+        if (!res.next()) {
+            // Throw custom exception if player not found
+            throw new PlayerNotFoundException("Player with ID " + res.getInt("player_id") + " does not exist.");
+        }
         connection.close();
+        
         return playerclass;
         
         
@@ -94,7 +100,9 @@ public class PlayerTable {
         
         ResultSet r = thi.executeQuery();
         
-        
+        if (!r.next()) {
+            throw new PlayerNotFoundException("Player with ID " + del + " does not exist.");
+        }
         
         while(r.next()) {
         	int teamid = r.getInt("team_id");
@@ -114,12 +122,8 @@ public class PlayerTable {
             	th.setInt(1, teamid);
             	th.setInt(2, teamid);
             	int ro = th.executeUpdate();
-            		if(ro>0) {
-            			System.out.println("Total players updated succesfully..! ");
-            		}
-        	}else {
-                System.out.println("Player_id not found...!");  
-            }
+            	
+        	}
         }
   }
         
@@ -142,7 +146,7 @@ public class PlayerTable {
         int res = third.executeUpdate();
 
         if (res>0) {
-        	System.out.println("Product updated succesfully..! ");
+        	System.out.println("Player updated succesfully..! ");
         	
         	String qus = "update team set total_players= (select count(*) from player where team_id=?) where team_id=?;";
             
@@ -159,7 +163,7 @@ public class PlayerTable {
         connection.close();
 	}
 
-	public  void viewAllPlayer() throws Exception {
+	public void viewAllPlayer() throws Exception {
 	    Class.forName("com.mysql.cj.jdbc.Driver");
 
 	    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sports_tournament", "root", "Moha12Villan13");
@@ -178,9 +182,7 @@ public class PlayerTable {
 	                System.out.println("");
 	                check=true;
 	            }
-	            if(res.next()==false && check==false) {
-	            	System.out.println("Player_id not found...");
-	            }
+	            
 	    
 	}
 }
