@@ -1,4 +1,4 @@
- *Customer Service Management System*
+ ## Customer Service Management System
 
 ## Description
 The Customer Service Management System is a console-based Java application that allows users to manage customer inquiry, complaint and resolutions. The system is built using Core Java and utilizes MySQL as the backend database, with JDBC (Java Database Connectivity) for database operations. This application provides a simple menu-driven interface to perform CRUD (Create, Read, Update, Delete) operations on the data.
