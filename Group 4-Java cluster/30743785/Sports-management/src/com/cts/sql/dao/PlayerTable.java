@@ -4,17 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
+import com.cts.sql.daointerface.PlayerManagement;
 import com.cts.sql.exceptions.PlayerNotFoundException;
 import com.cts.sql.model.PlayerClass;
 
-public class PlayerTable {
+public class PlayerTable implements PlayerManagement {
 
-	public void addPlayer(PlayerClass playerclass) throws Exception{
+	public void addPlayer(PlayerClass playerclass) throws  PlayerNotFoundException,Exception{
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sports_tournament", "root", "Moha12Villan13");
@@ -45,8 +42,8 @@ public class PlayerTable {
         connection.close();
 		
 	}
-
-	public PlayerClass viewPlayer(int pid) throws Exception{
+	@Override
+	public PlayerClass viewPlayer(int pid) throws  PlayerNotFoundException,Exception{
 		
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -79,14 +76,12 @@ public class PlayerTable {
         	
         }
         
-        
-        
         return playerclass;
         
         
 	}
-
-	public void delPlayer(int del) throws Exception {
+	@Override
+	public void delPlayer(int del) throws  PlayerNotFoundException,Exception {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sports_tournament", "root", "Moha12Villan13");
@@ -126,7 +121,7 @@ public class PlayerTable {
   }
         
 
-	public void updatePlayer(PlayerClass playerclass) throws Exception {
+	public void updatePlayer(PlayerClass playerclass) throws  PlayerNotFoundException,Exception {
 		
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -161,7 +156,7 @@ public class PlayerTable {
         connection.close();
 	}
 
-	public void viewAllPlayer() throws Exception {
+	public void viewAllPlayer() throws PlayerNotFoundException,Exception {
 	    Class.forName("com.mysql.cj.jdbc.Driver");
 
 	    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sports_tournament", "root", "Moha12Villan13");
@@ -171,14 +166,11 @@ public class PlayerTable {
 	        ResultSet res = stmt.executeQuery();
 	       // Boolean check = false;
 	            while (res.next()) {
-
-	                System.out.println("Player_id: " + res.getInt("player_id"));
-	                System.out.println("Name: " + res.getString("name"));
-	                System.out.println("Age: " + res.getInt("age"));
-	                System.out.println("Team_id: " + res.getInt("team_id"));
-	                System.out.println("Position: " + res.getString("position"));
-	                System.out.println("============================");
+	                System.out.printf("%-10s %-20s %-10s %-10s %-15s\n", "Player ID", "Name", "Age", "Team ID", "Position");
+	                System.out.println("-------------------------------------------------------------");
+				    System.out.printf("%-10d %-20s %-10d %-10d %-15s\n",res.getInt("player_id"),res.getString("name"),res.getInt("age"),res.getInt("team_id"),res.getString("position"));
 	               // check=true;
+				    System.out.println();
 	            }
 	            
 	    

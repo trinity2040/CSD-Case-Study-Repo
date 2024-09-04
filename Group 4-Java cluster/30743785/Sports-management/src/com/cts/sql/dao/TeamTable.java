@@ -5,9 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.cts.sql.daointerface.TeamManagement;
+import com.cts.sql.exceptions.PlayerNotFoundException;
 import com.cts.sql.model.TeamClass;
 
-public class TeamTable {
+public class TeamTable implements TeamManagement{
 
 	public void addTeam(TeamClass teamclass) throws Exception {
 		
@@ -32,7 +34,7 @@ public class TeamTable {
 		
 	}
 
-	public TeamClass viewTeam(int id) throws Exception {
+	public TeamClass viewTeam(int id) throws PlayerNotFoundException ,Exception{
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sports_tournament", "root", "Moha12Villan13");
@@ -113,17 +115,18 @@ public class TeamTable {
 
 	            while (res.next()) {
 
-	            	System.out.println("Team_id: "+res.getInt("team_id"));
-	            	System.out.println("name : "+res.getString("name"));
-	            	System.out.println("coach : "+res.getString("coach"));
-	            	System.out.println("captain : "+res.getString("captain"));
-	            	System.out.println("total_players : "+res.getInt("total_players"));
-	                System.out.println("============================");
+	            	System.out.printf("%-10s %-20s %-20s %-20s %-15s\n", "Team ID", "Name", "Coach", "Captain", "Total Players");
+	            	System.out.println("--------------------------------------------------------------------------------");
+	            	System.out.printf("%-10d %-20s %-20s %-20s %-15d\n",res.getInt("team_id"),res.getString("name"),res.getString("coach"),res.getString("captain"),res.getInt("total_players"));
+
+	                
+//	                System.out.printf("%-10s %-20s %-20s %-20s %-15s\n", "Team ID", "Coach", "Captain", "Total Players");
+//					System.out.println("--------------------------------------------------------------------------------");
+//				    System.out.printf("%-10d %-20s %-20s %-20s %-15d\n",res.getInt("team_id"),res.getString("name"),res.getString("coach"),res.getString("captain"),res.getInt("total_players"));
 	            }
 	            
 		
 	}
-
 	
 	
 }

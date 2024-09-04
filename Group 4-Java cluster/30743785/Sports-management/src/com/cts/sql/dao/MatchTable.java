@@ -1,9 +1,10 @@
 package com.cts.sql.dao;
 import java.sql.*;
 
+import com.cts.sql.daointerface.MatchManagement;
 import com.cts.sql.model.MatchClass;
 
-public class MatchTable {
+public class MatchTable implements MatchManagement{
 
 	public void addMatch(MatchClass matchclass)throws Exception {
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -27,7 +28,7 @@ public class MatchTable {
         }
         connection.close();
 	}
-
+	@Override
 	public MatchClass viewMatch(int id) throws Exception {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -55,6 +56,7 @@ public class MatchTable {
         	matchclass.setDate(res.getDate("match_date"));
         	matchclass.setVenue(res.getString("venue"));
         	matchclass.setResult(res.getString("result"));
+        	
         }
         
 //        if(res.next()==false) {
@@ -67,7 +69,7 @@ public class MatchTable {
 	}
 
 	
-
+	@Override
 	public void delMatch(int del) throws Exception{
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -81,7 +83,7 @@ public class MatchTable {
         	System.out.println("Match deleted succesfully..! ");
         }
 	}
-
+	@Override
 	public void updateMatch(MatchClass matchclass) throws Exception{
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -105,7 +107,7 @@ public class MatchTable {
         }
         connection.close();
 	}
-
+	@Override
 	public void updateMatchRecord(int matc, String re) throws Exception{
 		
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -127,7 +129,8 @@ public class MatchTable {
         }
         connection.close();
 	}
-
+	
+	@Override
 	public void viewAllMatch() throws Exception {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -138,15 +141,14 @@ public class MatchTable {
 		        ResultSet res = stmt.executeQuery();
 
 		            while (res.next()) {
-		            	System.out.println("Match_id :"+res.getInt("match_id"));
-		            	System.out.println("Team1_id: "+res.getInt("team1_id"));
-		            	System.out.println("Team2_id : "+res.getInt("team2_id"));
-		            	System.out.println("Match Date : "+res.getDate("match_date"));
-		            	System.out.println("Venue : "+res.getString("venue"));
-		            	System.out.println("Result : "+res.getString("result"));
-		            	System.out.println("================================");
+		            	System.out.printf("%-15s%-15s%-15s%-15s%-20s%-15s%n", "Match ID", "Team 1 ID", "Team 2 ID", "Date", "Venue", "Result");
+		            	System.out.println("--------------------------------------------------------------------------------------");
+		            	System.out.printf("%-15d%-15d%-15d%-15s%-20s%-15s%n", res.getInt("match_id"),res.getInt("team1_id"), res.getInt("team2_id"), res.getDate("match_date"), res.getString("venue"), res.getString("result"));
+		            	System.out.println();
 		            }
+		            
 	       
 	}
+
 
 }

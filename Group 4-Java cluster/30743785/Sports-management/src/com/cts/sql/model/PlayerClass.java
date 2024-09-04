@@ -6,6 +6,7 @@ public class PlayerClass {
 	int age;
 	int teamid;
 	String position;
+	
 	public PlayerClass(String pname, int age2, int tid, String pos) {
 		this.age=age2;
 		this.name=pname;
