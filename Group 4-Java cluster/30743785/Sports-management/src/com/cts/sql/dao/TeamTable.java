@@ -118,7 +118,7 @@ public class TeamTable {
 	            	System.out.println("coach : "+res.getString("coach"));
 	            	System.out.println("captain : "+res.getString("captain"));
 	            	System.out.println("total_players : "+res.getInt("total_players"));
-	                System.out.println();
+	                System.out.println("============================");
 	            }
 	            
 		

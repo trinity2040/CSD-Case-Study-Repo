@@ -54,9 +54,5 @@ public class TeamClass{
     public void setTotalPlayers(int totalPlayers) {
         this.totalPlayers = totalPlayers;
     }
-
-    @Override
-    public String toString() {
-        return "Team : [team_iD=" + this.teamId + ", Name=" + this.name + ", Coach=" + this.coach + ", Captain=" + this.captain + ", TotalPlayers=" + this.totalPlayers + "]";
-    }
+    
 }

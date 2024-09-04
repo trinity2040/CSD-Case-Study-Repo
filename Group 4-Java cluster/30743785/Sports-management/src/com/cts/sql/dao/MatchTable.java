@@ -82,7 +82,7 @@ public class MatchTable {
         }
 	}
 
-	public void updateMatch(int ut1, int ut2, Date udate, String uvenue, String uresult, int matchid) throws Exception{
+	public void updateMatch(MatchClass matchclass) throws Exception{
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sports_tournament", "root", "Moha12Villan13");
@@ -91,12 +91,12 @@ public class MatchTable {
 
 
         PreparedStatement third = connection.prepareStatement(querys);
-        third.setInt(1, ut1);
-        third.setInt(2, ut2);
-        third.setDate(3,udate);
-        third.setString(4,uvenue);
-        third.setString(5,uresult);
-        third.setInt(6, matchid);
+        third.setInt(1, matchclass.getTeam1_id());
+        third.setInt(2, matchclass.getTeam2_id());
+        third.setDate(3,matchclass.getDate());
+        third.setString(4,matchclass.getVenue());
+        third.setString(5,matchclass.getResult());
+        third.setInt(6, matchclass.getMatch_id());
         
         int res = third.executeUpdate();
 
@@ -133,7 +133,7 @@ public class MatchTable {
 
 	    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sports_tournament", "root", "Moha12Villan13");
 	        String query = "select * from matchtable;";
-	        try {
+	        
 	        	PreparedStatement stmt = connection.prepareStatement(query);
 		        ResultSet res = stmt.executeQuery();
 
@@ -144,16 +144,9 @@ public class MatchTable {
 		            	System.out.println("Match Date : "+res.getDate("match_date"));
 		            	System.out.println("Venue : "+res.getString("venue"));
 		            	System.out.println("Result : "+res.getString("result"));
-		            	System.out.println();
+		            	System.out.println("================================");
 		            }
-		            if(res.next()==false) {
-		            	System.out.println("match_id not found...");
-		            }
-	        }catch(Exception e) {
-	        	System.out.println("Exception :"+e);
-	        }
-	        
-		
+	       
 	}
 
 }

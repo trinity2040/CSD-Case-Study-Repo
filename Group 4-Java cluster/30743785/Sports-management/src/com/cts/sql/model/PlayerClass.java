@@ -45,7 +45,5 @@ public class PlayerClass {
 		this.position = position;
 	}
 	
-	public String toString() {
-		return "Player : { Player_id : "+this.player_id+",name : "+this.name+",age : "+this.age+",team_id : "+this.teamid+",position : "+this.position+ "}";
-	}
+	
 }

@@ -59,6 +59,8 @@ public class PlayerTable {
         third.setInt(1, pid);
         ResultSet res = third.executeQuery();
         PlayerClass playerclass = null;
+        
+        
         while (res.next()) {
         	
 //        	System.out.println("Player_id: "+res.getInt("player_id"));
@@ -77,11 +79,7 @@ public class PlayerTable {
         	
         }
         
-        if (!res.next()) {
-            // Throw custom exception if player not found
-            throw new PlayerNotFoundException("Player with ID " + res.getInt("player_id") + " does not exist.");
-        }
-        connection.close();
+        
         
         return playerclass;
         
@@ -128,7 +126,7 @@ public class PlayerTable {
   }
         
 
-	public void updatePlayer(String uname, int uage, int utid, int uid, String upos) throws Exception {
+	public void updatePlayer(PlayerClass playerclass) throws Exception {
 		
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -138,11 +136,11 @@ public class PlayerTable {
 
 
         PreparedStatement third = connection.prepareStatement(querys);
-        third.setString(1, uname);
-        third.setInt(2, uage);
-        third.setInt(3,utid);
-        third.setString(4, upos);
-        third.setInt(5, uid);
+        third.setString(1, playerclass.getName());
+        third.setInt(2, playerclass.getAge());
+        third.setInt(3,playerclass.getTeamid());
+        third.setString(4,playerclass.getPosition());
+        third.setInt(5, playerclass.getPlayer_id());
         int res = third.executeUpdate();
 
         if (res>0) {
@@ -151,14 +149,14 @@ public class PlayerTable {
         	String qus = "update team set total_players= (select count(*) from player where team_id=?) where team_id=?;";
             
             PreparedStatement thi = connection.prepareStatement(qus);
-            thi.setInt(1, utid);
-            thi.setInt(2, utid);
+            thi.setInt(1, playerclass.getPlayer_id());
+            thi.setInt(2,playerclass.getPlayer_id());
             int r = thi.executeUpdate();
             if(r>0) {
             	System.out.println("Total players updated succesfully..! ");
             }
         }else {
-        	System.out.println("Product_id no found ...");
+        	throw new PlayerNotFoundException("Player with ID " + playerclass.getPlayer_id() + " does not exist.");
         }
         connection.close();
 	}
@@ -171,7 +169,7 @@ public class PlayerTable {
 
 	        PreparedStatement stmt = connection.prepareStatement(query);
 	        ResultSet res = stmt.executeQuery();
-	        Boolean check = false;
+	       // Boolean check = false;
 	            while (res.next()) {
 
 	                System.out.println("Player_id: " + res.getInt("player_id"));
@@ -179,10 +177,12 @@ public class PlayerTable {
 	                System.out.println("Age: " + res.getInt("age"));
 	                System.out.println("Team_id: " + res.getInt("team_id"));
 	                System.out.println("Position: " + res.getString("position"));
-	                System.out.println("");
-	                check=true;
+	                System.out.println("============================");
+	               // check=true;
 	            }
 	            
 	    
 	}
+
+	
 }

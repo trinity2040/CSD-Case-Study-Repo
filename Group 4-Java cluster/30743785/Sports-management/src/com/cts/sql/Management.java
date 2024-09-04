@@ -5,6 +5,8 @@ import java.util.*;
 import com.cts.sql.dao.MatchTable;
 import com.cts.sql.dao.PlayerTable;
 import com.cts.sql.dao.TeamTable;
+import com.cts.sql.exceptions.MatchNotFoundException;
+import com.cts.sql.exceptions.PlayerNotFoundException;
 import com.cts.sql.exceptions.TeamNotFoundException;
 import com.cts.sql.model.MatchClass;
 import com.cts.sql.model.PlayerClass;
@@ -14,6 +16,7 @@ import java.sql.Date;
 
 public class Management {
 	Scanner sc = new Scanner(System.in);
+	
 	public void fetchDataTeam() throws Exception {
 		
 		System.out.println("Welcome to the Team Table..:");
@@ -41,7 +44,14 @@ public class Management {
 		case 2:
 			System.out.println("Enter the team id to view :");
 			int id = sc.nextInt();
-			System.out.println(team.viewTeam(id)); 
+			TeamClass teamclas = team.viewTeam(id);
+			System.out.println("Team_id: "+teamclas.getTeamId());
+			System.out.println("name : "+teamclas.getName());
+			System.out.println("coach : "+teamclas.getCoach());
+			System.out.println("captain : "+teamclas.getCaptain());
+			System.out.println("total_players : "+teamclas.getTotalPlayers());
+			
+			//System.out.println(team.viewTeam(id)); 
 			break;
 		case 3:
 			System.out.println("Enter the team id to update :");
@@ -80,7 +90,7 @@ public class Management {
 	public void fetchDataPlayer() throws Exception {
 		System.out.println("Welcome to the Player Table..:");
 		System.out.println("1. Add new Player :");
-		System.out.println("2. View the Player bu player_id :");
+		System.out.println("2. View the Player by player_id :");
 		System.out.println("3. Update the Player :");
 		System.out.println("4. Delete the Player :");
 		System.out.println("5. View all Player :");
@@ -106,21 +116,39 @@ public class Management {
 		case 2:
 			System.out.println("Enter the player_id to view :");
 			int pid = sc.nextInt();
-			System.out.println(player.viewPlayer(pid)); 
-			break;
+			
+			PlayerClass playclas = player.viewPlayer(pid);
+			if(playclas!=null) {
+			System.out.println("Team_id: "+playclas.getPlayer_id());
+			System.out.println("name : "+playclas.getName());
+			System.out.println("coach : "+playclas.getAge());
+			System.out.println("captain : "+playclas.getTeamid());
+			System.out.println("total_players : "+playclas.getPosition());
+			}else {
+				throw new PlayerNotFoundException("Player with ID " + pid + " does not exist.");
+			}
+			//System.out.println(player.viewPlayer(pid)); 
+			return;
 		case 3:
-			System.out.println("Enter the player name to update:");
-			String uname = sc.next();
-			System.out.println("Enter the player age to update:");
-			int uage = sc.nextInt();
-			System.out.println("Enter the player team_id to update:");
-			int utid= sc.nextInt();
-			System.out.println("Enter the position to update:");
-			String upos = sc.next();
 			System.out.println("Enter the player_id to update :");
 			int uid = sc.nextInt(); 
+			PlayerClass uplayclas = player.viewPlayer(uid);
+			if(uplayclas!=null) {
+				System.out.println("Enter the player name to update:");
+				uplayclas.setName(sc.next());
+				System.out.println("Enter the player age to update:");
+				//int uage = sc.nextInt();
+				uplayclas.setAge(sc.nextInt());
+				System.out.println("Enter the player team_id to update:");
+				//int utid= ;
+				uplayclas.setTeamid(sc.nextInt());
+				System.out.println("Enter the position to update:");
+				uplayclas.setPosition(sc.next());
+				player.updatePlayer(uplayclas);
+			}else {
+				throw new PlayerNotFoundException("Player with ID " + uid + " does not exist.");
+			}
 			
-			player.updatePlayer(uname,uage,utid,uid,upos);
 			break;
 		case 4:
 			System.out.println("Enter the player_id to delete :");
@@ -132,7 +160,7 @@ public class Management {
 			break;
 		default:
 			System.out.println("Enter the correct Choice...");
-			break;
+			return;
 		}
 		
 	}
@@ -170,24 +198,44 @@ public class Management {
 		case 2:
 			System.out.println("Enter the match_id to view :");
 			int id = sc.nextInt();
-			System.out.println(match.viewMatch(id)); 
+			MatchClass matchcl = match.viewMatch(id);
+			if(matchcl!=null) {
+			System.out.println(matchcl.getMatch_id());
+        	System.out.println(matchcl.getTeam1_id());
+        	System.out.println(matchcl.getTeam2_id());
+        	System.out.println(matchcl.getDate());
+        	System.out.println(matchcl.getVenue());
+        	System.out.println(matchcl.getResult());
+			}else {
+				throw new MatchNotFoundException("Match with ID " + id + " does not exist.");
+			}
 			break;
 		case 3:
+			System.out.println("Enter the match_id to update:");
+			int matchid = sc.nextInt();
+			
+			MatchClass matchcla = match.viewMatch(matchid);
+			if(matchcla!=null) {
 			System.out.println("Enter the team 1 id to update:");
-			int ut1= sc.nextInt();
+			//int ut1= sc.nextInt();
+			matchcla.setTeam1_id(sc.nextInt());
 			System.out.println("Enter the team 2 id to update:");
-			int ut2= sc.nextInt();
+			//int ut2= sc.nextInt();
+			matchcla.setTeam2_id(sc.nextInt());
 			System.out.println("Enter the match date(yyyy/mm/dd)to update :");
 			String ud = sc.next();
 			Date udate = Date.valueOf(ud);
+			matchcla.setDate(udate);
 			sc.nextLine();
 			System.out.println("Enter the Venue to update:");
-			String uvenue = sc.next();
+			matchcla.setVenue(sc.next());
 			System.out.println("Enter the result to update:");
-			String uresult = sc.next();
-			System.out.println("Enter the match_id to update:");
-			int matchid = sc.nextInt();
-			match.updateMatch(ut1,ut2,udate,uvenue,uresult,matchid);
+			//String uresult = sc.next();
+			matchcla.setResult(sc.next());
+			match.updateMatch(matchcla);
+			}else {
+				throw new MatchNotFoundException("Match_id You Entered "+matchid+" does not found!");
+			}
 			break;
 		case 4:
 			System.out.println("Enter the match_id to delete :");
@@ -206,7 +254,8 @@ public class Management {
 			break;
 		default:
 			System.out.println("Enter the correct Choice...");
-			break;
+			return;
+			
 		}
 		
 	}

@@ -56,9 +56,5 @@ public class MatchClass {
 	public void setResult(String result) {
 		this.result = result;
 	}
-	
-	public String toString() {
-		return "Matches : { Match_id : "+this.match_id+",team1_id : "+this.team1_id+",team2_id :"+this.team2_id+",date :"+this.date+",venue :"+this.venue+",result :"+this.result+" }";
-	}
-	
+		
 }
